@@ -1,8 +1,12 @@
 import React from 'react';
-import {HashRouter as Router, Switch, Route} from 'react-router-dom';
+import PropTypes from "prop-types";
+import {Switch, Route} from 'react-router-dom';
 import Auth from '../Routers/Auth';
 import Feed from '../Routers/Feed';
-import PropTypes from "prop-types";
+import Explore from '../Routers/Explore';
+import Profile from '../Routers/Profile';
+import Search from '../Routers/Search';
+
 //false
 const LoggedOutRouter = () => (
   <>
@@ -12,17 +16,18 @@ const LoggedOutRouter = () => (
 
 //true
 const LoggedInRouter = () => (
-  <>
+  <Switch>
     <Route exact path="/" component={Feed}/>
-  </>
+    <Route exact path="/explore" component={Explore}/>
+    <Route exact path="/search" component={Search}/>
+    <Route path="/:username" component={Profile}/>
+  </Switch>
 );
 
 const Root = ({isLoggedIn}) => (
-  <Router>
-    <Switch>
-      {isLoggedIn ? <LoggedInRouter/> : <LoggedOutRouter/>}
-    </Switch>
-  </Router>
+  <Switch>
+    {isLoggedIn ? <LoggedInRouter/> : <LoggedOutRouter/>}
+  </Switch>
 );
 
 // 이거 반드시 써줘야 버그를 쉽게 잡을 수 있다.\

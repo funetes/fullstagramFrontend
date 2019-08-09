@@ -13,18 +13,21 @@ const Container = styled.input`
 `;
 
 // 함수처럼 컴포넌트 정의해주면됨.
-const Input = ({placeholder,value,onChange}) => 
-  <Container 
-    placeholder={placeholder} 
-    value={value} 
-    onChange={onChange} 
-    required/>;
+const Input = ({placeholder,value,onChange,type="text",required=true}) => 
+  (<Container 
+    placeholder = {placeholder} 
+    value = {value} 
+    onChange = {onChange} 
+    required = {required}
+    type = {type}/>
+  )
 
 Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  value: PropTypes.string,
-  onChange: PropTypes.func
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  type: PropTypes.string
 };
 // component 를 가지는 함수를 전한다.
 export default Input;
